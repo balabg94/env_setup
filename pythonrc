@@ -1,16 +1,36 @@
+import atexit
+import os
 
-# Tab completion
 try:
     import readline
 except ImportError:
-    print("Module readline not available.")
+    print(".pythonrc :: Module readline not available.")
 else:
     import rlcompleter
-    if 'libedit' in readline.__doc__:
-        readline.parse_and_bind("bind ^I rl_complete")
-    else:
-        readline.parse_and_bind("tab: complete")
 
+    readline.parse_and_bind("tab: complete")
+    print(".pythonrc :: AutoCompletion Loaded") # Tab completion
+
+    history_file = os.path.join(os.path.expanduser("~"), ".pyhistory")
+    print(".pythonrc :: history file:", history_file) # History
+
+
+    def save_history(history=history_file):
+        import readline
+        readline.write_history_file(history)
+        print(".pythonrc :: history saved to " + history)
+
+
+    def load_history(history=history_file):
+        try:
+            readline.read_history_file(history)
+        except IOError:
+            pass
+
+    load_history()
+    atexit.register(save_history)
+
+    del readline, rlcompleter, atexit, history_file # Command history setup
 
 # Prints the current python interpreter version before the prompt
 try:
@@ -22,4 +42,3 @@ try:
     sys.ps2 = "[{}] ... ".format(ver_string)
 except Exception as e:
     pass
-
