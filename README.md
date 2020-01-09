@@ -1,2 +1,2 @@
 # env_setup
-Personal laptop environment setup; .pytonrc, .emacs, .bashrc etc
+Personal work environment setup; .pytonrc, .emacs, .bashrc etc
