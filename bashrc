@@ -93,6 +93,7 @@ alias la='ls -A'
 alias lla='ls -Al'
 alias l='ls -CF'
 alias gs='git status'
+alias lock='i3lock -i ~/Pictures/Wallpapers/93.png -p win -f'
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
