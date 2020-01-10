@@ -146,7 +146,20 @@ unset __conda_setup
 # eval "$(pyenv init -)"
 # eval "$(pyenv virtualenv-init -)"
 
+# get current branch in git repo
+function parse_git_branch() {
+	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${BRANCH}" == "" ]
+	then
+		STAT=`parse_git_dirty`
+		echo "[${BRANCH}${STAT}]"
+	else
+		echo ""
+	fi
+}
 
+# sets terminal tab title
+PROMPT_COMMAND='echo -en "\033]0; $("pwd") \a"'
 # get current status of git repo
 function parse_git_dirty {
 	status=`git status 2>&1 | tee`
